@@ -32,7 +32,7 @@ class Category extends Component {
     render () {
         return (
             <Layout>
-                <Sider width={200} className="site-layout-background">
+                <Sider width={200}>
                     <Menu
                         mode="inline"
                         onClick={this.handleClick} selectedKeys={[this.state.current]}
@@ -43,11 +43,16 @@ class Category extends Component {
                         <Menu.Item key="/category/fmale">
                             <Link to="/category/fmale">category/fmale</Link>
                         </Menu.Item>
+                        <Menu.Item key="/category/press">
+                            <Link to="/category/press">category/press</Link>
+                        </Menu.Item>
+                        <Menu.Item key="/category/picture">
+                            <Link to="/category/picture">category/picture</Link>
+                        </Menu.Item>
                     </Menu>
                 </Sider>
-                <Layout style={{ padding: '0 24px 24px' }}>
+                <Layout>
                     <Content
-                        className="site-layout-background"
                         style={{
                             padding: 24,
                             margin: 0,

@@ -32,7 +32,7 @@ class Ranking extends Component {
     render () {
         return (
             <Layout>
-                <Sider width={200} className="site-layout-background">
+                <Sider width={200}>
                     <Menu
                         mode="inline"
                         onClick={this.handleClick} selectedKeys={[this.state.current]}
@@ -43,11 +43,16 @@ class Ranking extends Component {
                         <Menu.Item key="/ranking/fmale">
                             <Link to="/ranking/fmale">ranking/fmale</Link>
                         </Menu.Item>
+                        <Menu.Item key="/ranking/press">
+                            <Link to="/ranking/press">ranking/press</Link>
+                        </Menu.Item>
+                        <Menu.Item key="/ranking/picture">
+                            <Link to="/ranking/picture">ranking/picture</Link>
+                        </Menu.Item>
                     </Menu>
                 </Sider>
-                <Layout style={{ padding: '0 24px 24px' }}>
+                <Layout>
                     <Content
-                        className="site-layout-background"
                         style={{
                             padding: 24,
                             margin: 0,
