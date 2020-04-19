@@ -25,7 +25,7 @@ class App extends Component {
                     <Content>
                         <MainView></MainView>
                     </Content>
-                    <Footer>Footer</Footer>
+                    <Footer>本站提供的内容均来源于网络,纯属共享学习之用,若有侵权,请与管理员邮箱联系！</Footer>
                 </Layout>
             </BrowserRouter>
         );

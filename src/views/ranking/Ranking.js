@@ -36,18 +36,18 @@ class Ranking extends Component {
                     <Menu
                         mode="inline"
                         onClick={this.handleClick} selectedKeys={[this.state.current]}
-                        style={{ height: '100%', borderRight: 0 }}>
+                        style={{ height: '100%' }}>
                         <Menu.Item key="/ranking/male">
-                            <Link to="/ranking/male">ranking/male</Link>
+                            <Link to="/ranking/male">男生</Link>
                         </Menu.Item>
                         <Menu.Item key="/ranking/fmale">
-                            <Link to="/ranking/fmale">ranking/fmale</Link>
+                            <Link to="/ranking/fmale">女生</Link>
                         </Menu.Item>
                         <Menu.Item key="/ranking/press">
-                            <Link to="/ranking/press">ranking/press</Link>
+                            <Link to="/ranking/press">出版物</Link>
                         </Menu.Item>
                         <Menu.Item key="/ranking/picture">
-                            <Link to="/ranking/picture">ranking/picture</Link>
+                            <Link to="/ranking/picture">图片漫画</Link>
                         </Menu.Item>
                     </Menu>
                 </Sider>

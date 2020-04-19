@@ -31,14 +31,17 @@ class HeaderView extends Component {
     render () {
         return (
             <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" theme="dark">
+                <Menu.Item key="home">
+                    <Link to="/home">首页</Link>
+                </Menu.Item>
                 <Menu.Item key="category">
-                    <Link to="/category/male">category</Link>
+                    <Link to="/category/male">热门分类</Link>
                 </Menu.Item>
                 <Menu.Item key="ranking">
-                    <Link to="/ranking/male">ranking</Link>
+                    <Link to="/ranking/male">排行榜</Link>
                 </Menu.Item>
                 <Menu.Item key="bookshelf">
-                    <Link to="/bookshelf">bookshelf</Link>
+                    <Link to="/bookshelf">我的书架</Link>
                 </Menu.Item>
             </Menu>
         );

@@ -1,0 +1,22 @@
+/*
+ * @Author: ZhuQiMing
+ * @CreateTime: 2020/4/19 23:04
+ */
+import React, { Component } from 'react';
+
+class Home extends Component {
+    constructor (props) {
+        super(props);
+        this.state = {};
+    }
+
+    render () {
+        return (
+            <div>
+                index
+            </div>
+        );
+    }
+}
+
+export default Home;
