@@ -50,7 +50,7 @@ class MainView extends Component {
                         <Route exact path="/ranking/picture" component={Rpicture}></Route>
                     </Switch>
                 </Ranking>
-                <Route path="/bookinfo" component={Bookinfo}></Route>
+                <Route path="/bookinfo/:id" component={Bookinfo}></Route>
                 <Route exact path="/bookshelf" component={Bookshelf}></Route>
             </Switch>
         );

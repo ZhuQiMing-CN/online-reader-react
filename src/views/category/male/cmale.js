@@ -5,7 +5,7 @@
 import React, { Component, Fragment } from 'react';
 import { Radio, Row, Col, Pagination, Result } from 'antd';
 
-import { Categorylist, Categorylistbook } from '../../../axios/api';
+import { categoryList, categoryListBook } from '../../../axios/api';
 
 class Cmale extends Component {
     constructor (props) {
@@ -45,7 +45,7 @@ class Cmale extends Component {
 
     componentDidMount () {
         // 获取分类下小类别
-        Categorylist().then(res => {
+        categoryList().then(res => {
             if (res.ok === true) {
                 this.setState({
                     majorList: res.male,
@@ -97,7 +97,7 @@ class Cmale extends Component {
             start: this.state.start,
             limit: this.state.limit
         };
-        Categorylistbook(parmas).then(res => {
+        categoryListBook(parmas).then(res => {
             if (res.ok === true) {
                 this.setState({
                     booksData: res.books,
