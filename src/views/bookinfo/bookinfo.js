@@ -6,6 +6,8 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, Button, Row, Col } from 'antd';
 import { bookInfo, bookSources, bookCatalog } from '../../axios/api';
+import { connect } from 'react-redux';
+import { updateBookShelf } from '../../store/action';
 
 class Bookinfo extends Component {
     constructor (props) {
@@ -70,6 +72,14 @@ class Bookinfo extends Component {
         });
     }
 
+    // 加入书架
+    addBooks = (e) => {
+        // console.log(e);
+        let data = this.props.bookShelf.concat(['123'])
+        this.props.updateBookShelf({bookShelf: data})
+        console.log(this.props);
+    }
+
     render () {
         return (
             <Fragment>
@@ -98,7 +108,7 @@ class Bookinfo extends Component {
                                 <p>当前小说源：{this.state.sourceName}</p>
                             </div>
                             <div className="mt-20">
-                                <Button type="primary">加入书架</Button>
+                                <Button type="primary" onClick={this.addBooks}>加入书架</Button>
                                 <Button type="primary" className="ml-15">开始阅读</Button>
                                 <Button type="primary" className="ml-15">更换小说源</Button>
                             </div>
@@ -143,4 +153,17 @@ class Bookinfo extends Component {
     }
 }
 
-export default Bookinfo;
+const mapStateToProps = (state, ownProps) => {
+    console.log('state', state);
+    return state
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        updateBookShelf: (data) => {
+            dispatch(updateBookShelf(data));
+        },
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Bookinfo);

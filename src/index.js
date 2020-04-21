@@ -5,11 +5,18 @@ import App from './App';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import { store, persistor } from './store';
+import { PersistGate } from 'redux-persist/lib/integration/react';
 
 ReactDOM.render(
-    <ConfigProvider locale={zhCN}>
-        <App />
-    </ConfigProvider>,
+    <Provider store={store}>
+        <PersistGate persistor={persistor}>
+            <ConfigProvider locale={zhCN}>
+                <App />
+            </ConfigProvider>
+        </PersistGate>
+    </Provider>,
   document.getElementById('root')
 );
 
