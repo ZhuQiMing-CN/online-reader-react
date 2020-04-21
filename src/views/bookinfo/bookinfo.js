@@ -4,7 +4,7 @@
  */
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Button, Row, Col } from 'antd';
+import { Breadcrumb, Button, Row, Col, message } from 'antd';
 import { bookInfo, bookSources, bookCatalog } from '../../axios/api';
 import { connect } from 'react-redux';
 import { updateBookShelf } from '../../store/action';
@@ -74,10 +74,33 @@ class Bookinfo extends Component {
 
     // 加入书架
     addBooks = (e) => {
-        // console.log(e);
-        let data = this.props.bookShelf.concat(['123'])
-        this.props.updateBookShelf({bookShelf: data})
-        console.log(this.props);
+        let bookShelfs;
+        if (typeof this.props.bookShelf == "string") {
+            bookShelfs = JSON.parse(this.props.bookShelf);
+        } else {
+            bookShelfs = this.props.bookShelf;
+        }
+        if (bookShelfs.findIndex(item => item.id === this.props.match.params.id) === -1) {
+            let readRecord = {
+                id: this.state.bookLink._id,
+                title: this.state.bookLink.title,
+                cover: this.state.bookLink.cover,
+                author: this.state.bookLink.author,
+                readlink: this.state.catalogList[0].link,
+                readtitle: this.state.catalogList[0].title,
+                sourceId: this.state.sourceId,
+                readsource: this.state.sourceName,
+                lastChapter: this.state.lastChapter
+            };
+            bookShelfs.push(readRecord);
+            this.props.updateBookShelf({bookShelf: JSON.stringify(bookShelfs)});
+        } else {
+            bookShelfs[bookShelfs.findIndex(item => item.id === this.props.match.params.id)].sourceId = this.state.sourceId;
+            bookShelfs[bookShelfs.findIndex(item => item.id === this.props.match.params.id)].readsource = this.state.sourceName;
+            bookShelfs[bookShelfs.findIndex(item => item.id === this.props.match.params.id)].lastChapter = this.state.lastChapter;
+            this.props.updateBookShelf({bookShelf: JSON.stringify(bookShelfs)});
+            message.error('此本书已经加入书架咯~');
+        }
     }
 
     render () {

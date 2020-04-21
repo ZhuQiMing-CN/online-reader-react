@@ -107,6 +107,7 @@ class Cmale extends Component {
         });
     }
 
+    // 查看书本详情
     getBookinfo = (e) => {
         this.props.history.push('/bookinfo/' + e._id);
     }

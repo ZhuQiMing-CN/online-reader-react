@@ -200,3 +200,41 @@
         color: #d82626;
     }
 }
+
+.book-shelf {
+    background: #FFF;
+    .shelf-info {
+        width: 100%;
+        padding: 10px;
+        border-bottom: 1px solid #2c3e50;
+        span {
+            color: #d82626;
+            font-weight: 700;
+        }
+    }
+    .book-list {
+        display: flex;
+        padding: 10px;
+        img {
+            width: 90px;
+            height: 120px;
+            cursor: pointer;
+            border: 1px solid #ebebeb;
+            box-shadow: 2px 4px 6px #bbb;
+        }
+        .book-info {
+            padding: 0px 10px;
+            p {
+                margin: 0px;
+                height: 26px;
+                line-height: 26px;
+                overflow: hidden;
+            }
+            p:first-child {
+                height: 22px;
+                line-height: 22px;
+                font-weight: 700;
+            }
+        }
+    }
+}
