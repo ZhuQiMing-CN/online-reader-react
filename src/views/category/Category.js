@@ -17,7 +17,6 @@ class Category extends Component {
     }
 
     componentDidMount() {
-        console.log('category', this.props.location);
         this.setState({
             current: this.props.location.pathname
         });
@@ -40,25 +39,19 @@ class Category extends Component {
                         <Menu.Item key="/category/male">
                             <Link to="/category/male">男生</Link>
                         </Menu.Item>
-                        <Menu.Item key="/category/fmale">
-                            <Link to="/category/fmale">女生</Link>
+                        <Menu.Item key="/category/female">
+                            <Link to="/category/female">女生</Link>
                         </Menu.Item>
                         <Menu.Item key="/category/press">
                             <Link to="/category/press">出版物</Link>
                         </Menu.Item>
                         <Menu.Item key="/category/picture">
-                            <Link to="/category/picture">图片漫画</Link>
+                            <Link to="/category/picture">图书漫画</Link>
                         </Menu.Item>
                     </Menu>
                 </Sider>
                 <Layout>
-                    <Content
-                        style={{
-                            padding: 24,
-                            margin: 0,
-                            minHeight: 280,
-                        }}
-                    >
+                    <Content style={{padding: '20px'}}>
                         {this.props.children}
                     </Content>
                 </Layout>

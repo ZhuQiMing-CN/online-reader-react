@@ -36,7 +36,7 @@ class MainView extends Component {
                     <Switch>
                         <Redirect exact from="/category" to="/category/male"></Redirect>
                         <Route exact path="/category/male" component={Cmale}></Route>
-                        <Route exact path="/category/fmale" component={Cfemale}></Route>
+                        <Route exact path="/category/female" component={Cfemale}></Route>
                         <Route exact path="/category/press" component={Cpress}></Route>
                         <Route exact path="/category/picture" component={Cpicture}></Route>
                     </Switch>

@@ -29,6 +29,7 @@ class Bookinfo extends Component {
     }
 
     componentDidMount () {
+        console.log(this.props);
         // 获取小说信息
         bookInfo(this.props.match.params.id).then(res => {
             this.setState({
@@ -111,7 +112,8 @@ class Bookinfo extends Component {
                         <Link to="/home">首页</Link>
                     </Breadcrumb.Item>
                     <Breadcrumb.Item>
-                        <Link to="/category/male">{this.state.bookLink.cat}</Link>
+                        {/*<Link to="/category/male">{this.state.bookLink.cat}</Link>*/}
+                        {this.state.bookLink.cat}
                     </Breadcrumb.Item>
                     <Breadcrumb.Item>{this.state.bookLink.title}</Breadcrumb.Item>
                 </Breadcrumb>
@@ -177,7 +179,6 @@ class Bookinfo extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log('state', state);
     return state
 }
 

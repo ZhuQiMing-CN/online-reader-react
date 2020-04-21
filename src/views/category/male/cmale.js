@@ -4,7 +4,6 @@
  */
 import React, { Component, Fragment } from 'react';
 import { Radio, Row, Col, Pagination, Result } from 'antd';
-
 import { categoryList, categoryListBook } from '../../../axios/api';
 
 class Cmale extends Component {
@@ -53,7 +52,7 @@ class Cmale extends Component {
                     minsList: res.male[0].mins,
                     defaultMins: res.male[0].mins[0]
                 }, () => {
-                    this.getCategorylistbook();
+                    this.getCategoryMaleBook();
                 })
             }
         });
@@ -66,7 +65,7 @@ class Cmale extends Component {
             minsList: e.target.value.mins,
             defaultMins: e.target.value.mins[0]
         }, () => {
-            this.getCategorylistbook();
+            this.getCategoryMaleBook();
         });
     }
 
@@ -75,7 +74,7 @@ class Cmale extends Component {
         this.setState({
             defaultMins: e.target.value
         }, () => {
-            this.getCategorylistbook();
+            this.getCategoryMaleBook();
         });
     }
 
@@ -84,11 +83,12 @@ class Cmale extends Component {
         this.setState({
             defaultType: e.target.value
         }, () => {
-            this.getCategorylistbook();
+            this.getCategoryMaleBook();
         });
     }
 
-    getCategorylistbook () {
+    // 根据分类获取小说列表
+    getCategoryMaleBook () {
         let parmas = {
             gender: this.state.bookgender,
             type: this.state.defaultType,
@@ -118,7 +118,7 @@ class Cmale extends Component {
             start: page - 1,
             maleCurrentPage: page
         }, () => {
-            this.getCategorylistbook();
+            this.getCategoryMaleBook();
         });
     }
 
@@ -127,7 +127,7 @@ class Cmale extends Component {
         this.setState({
             limit: size
         }, () => {
-            this.getCategorylistbook();
+            this.getCategoryMaleBook();
         });
     }
 
@@ -202,7 +202,7 @@ class Cmale extends Component {
                                     <p className="desc">{ value.shortIntro }</p>
                                     <p className="popularity">
                                         <span>{value.latelyFollower}</span> 人气 |
-                                        <span>{value.retentionRatio}</span> 读者存留
+                                        <span> {value.retentionRatio}</span> 读者存留
                                     </p>
                                 </div>
                             </Col>
@@ -213,7 +213,7 @@ class Cmale extends Component {
                             </Result>
                     }
                 </Row>
-                {this.state.totalData > 0 ? <hr/> : ''}
+                { this.state.totalData > 0 ? <hr/> : '' }
                 {
                     this.state.totalData > 0 ?
                         <Pagination
@@ -225,8 +225,8 @@ class Cmale extends Component {
                             total={this.state.totalData}
                             onChange={this.malePageChange}
                             onShowSizeChange={this.malePageSizeChange}>
-                        </Pagination> : ''}
-
+                        </Pagination> : ''
+                }
             </Fragment>
         );
     }
