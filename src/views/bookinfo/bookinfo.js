@@ -4,7 +4,7 @@
  */
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Button, Row, Col, message } from 'antd';
+import { Breadcrumb, Button, Row, Col, message, Modal, Form, Input, Radio } from 'antd';
 import { bookInfo, bookSources, bookCatalog } from '../../axios/api';
 import { connect } from 'react-redux';
 import { updateBookShelf } from '../../store/action';
@@ -18,18 +18,19 @@ class Bookinfo extends Component {
             mybookData: [],
             sourceId: '',
             sourceName: '',
+            sources: '',
             lastChapter: '',
             formSources: {
                 sources: '',
                 lastChapter: ''
             },
             sourcesData: [],
-            catalogList: []
+            catalogList: [],
+            dialogSources: false
         };
     }
 
     componentDidMount () {
-        console.log(this.props);
         // 获取小说信息
         bookInfo(this.props.match.params.id).then(res => {
             this.setState({
@@ -51,6 +52,7 @@ class Bookinfo extends Component {
             this.setState({
                 sourceId: res[0]._id,
                 sourceName: res[0].name,
+                sources: res[0],
                 lastChapter: res[0].lastChapter,
                 formSources: {
                     sources: res[0].name,
@@ -162,6 +164,64 @@ class Bookinfo extends Component {
         this.props.history.push('/bookchapter/' + e._id);
     }
 
+    // 选择其他的小说源
+    changeSources = (e) => {
+        this.refs.formRef.setFieldsValue({
+            lastChapter: e.target.value.lastChapter
+        })
+    }
+
+    // 确定选择小说源
+    affirmSources = () => {
+        this.refs.formRef.validateFields().then(value => {
+            this.setState({
+                sourceId: value.sources._id,
+                sourceName: value.sources.name,
+                lastChapter: value.sources.lastChapter,
+                dialogSources: false
+            }, () => {
+                this.getCatalog();
+                // 书架状态管理
+                let bookShelfs;
+                if (typeof this.props.bookShelf == "string") {
+                    bookShelfs = JSON.parse(this.props.bookShelf);
+                } else {
+                    bookShelfs = this.props.bookShelf;
+                }
+                if (bookShelfs.findIndex(item => item.id === this.props.match.params.id) === -1) {
+                    let readRecord = {
+                        id: this.state.bookLink._id,
+                        title: this.state.bookLink.title,
+                        cover: this.state.bookLink.cover,
+                        author: this.state.bookLink.author,
+                        readlink: this.state.catalogList[0].link,
+                        readtitle: this.state.catalogList[0].title,
+                        sourceId: this.state.sourceId,
+                        readsource: this.state.sourceName,
+                        lastChapter: this.state.lastChapter
+                    };
+                    bookShelfs.push(readRecord);
+                    this.props.updateBookShelf({bookShelf: JSON.stringify(bookShelfs)});
+                } else {
+                    bookShelfs[bookShelfs.findIndex(item => item.id === this.props.match.params.id)].sourceId = this.state.sourceId;
+                    bookShelfs[bookShelfs.findIndex(item => item.id === this.props.match.params.id)].readsource = this.state.sourceName;
+                    bookShelfs[bookShelfs.findIndex(item => item.id === this.props.match.params.id)].lastChapter = this.state.lastChapter;
+                    bookShelfs[bookShelfs.findIndex(item => item.id === this.props.match.params.id)].readlink = '';
+                    this.props.updateBookShelf({bookShelf: JSON.stringify(bookShelfs)});
+                }
+            });
+        })
+    }
+
+    // 取消选择小说源
+    cancelSources = () => {
+        this.setState({
+            dialogSources: false
+        }, () => {
+            this.refs.formRef.resetFields();
+        });
+    }
+
     render () {
         return (
             <Fragment>
@@ -198,7 +258,12 @@ class Bookinfo extends Component {
                                     className="ml-15">
                                     开始阅读
                                 </Button>
-                                <Button type="primary" className="ml-15">更换小说源</Button>
+                                <Button
+                                    type="primary"
+                                    onClick={() => this.setState({dialogSources: true})}
+                                    className="ml-15">
+                                    更换小说源
+                                </Button>
                             </div>
                         </div>
                         <p className="long-intro">{this.state.bookLink.longIntro}</p>
@@ -230,7 +295,7 @@ class Bookinfo extends Component {
                             this.state.catalogList.map((value, index) => (
                                 <li
                                     className="chapter-li"
-                                    key={value._id}
+                                    key={value.link}
                                     onClick={() => this.chapterMatter(value)}>
                                     <span className={value.isVip?"text-danger":""}>{value.title}</span>
                                 </li>
@@ -239,6 +304,37 @@ class Bookinfo extends Component {
                     </div>
                     <div style={{clear: "both"}}></div>
                 </div>
+                <Modal
+                    title="Basic Modal"
+                    visible={this.state.dialogSources}
+                    onOk={this.affirmSources}
+                    onCancel={this.cancelSources}
+                >
+                    <Form ref="formRef" initialValues={{sources: this.state.sources, lastChapter: this.state.lastChapter}}>
+                        <Form.Item label="小说源" name="sources">
+                            <Radio.Group>
+                                {
+                                    this.state.sourcesData.map((value, index) => (
+                                        <Radio
+                                            style={{padding: '2px 5px', width: '30%'}}
+                                            value={value}
+                                            key={value._id}
+                                            onChange={this.changeSources}
+                                        >
+                                            {value.name}
+                                        </Radio>
+                                    ))
+                                }
+                            </Radio.Group>
+                        </Form.Item>
+                        <Form.Item label="最新章节" name="lastChapter">
+                            <Input disabled />
+                        </Form.Item>
+                        <Form.Item label="注意事项">
+                            <span>不同的小说源的章节可能会不一样，选择其他的小说源后需要重新选择章节阅读！</span>
+                        </Form.Item>
+                    </Form>
+                </Modal>
             </Fragment>
         );
     }
