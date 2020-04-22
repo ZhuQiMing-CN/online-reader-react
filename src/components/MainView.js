@@ -22,6 +22,7 @@ import Rpicture from '../views/ranking/picture/rpicture';
 import Bookinfo from '../views/bookinfo/bookinfo';
 import Bookchapter from '../views/bookchapter/bookchapter';
 import Bookshelf from '../views/bookshelf/bookshelf';
+import Booksearch from '../views/search/search';
 
 class MainView extends Component {
     constructor (props) {
@@ -54,6 +55,7 @@ class MainView extends Component {
                 <Route path="/bookinfo/:id" component={Bookinfo}></Route>
                 <Route path="/bookchapter/:id" component={Bookchapter}></Route>
                 <Route exact path="/bookshelf" component={Bookshelf}></Route>
+                <Route exact path="/search" component={Booksearch}></Route>
             </Switch>
         );
     }

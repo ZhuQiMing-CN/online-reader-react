@@ -44,8 +44,7 @@ class Bookshelf extends Component {
             <div className="book-shelf">
                 <Row>
                     <p className="shelf-info">
-                        我的书架共有
-                        <span>{this.state.bookShelfs.length}</span>本在看的书籍：
+                        我的书架共有 <span>{this.state.bookShelfs.length}</span> 本在看的书籍：
                     </p>
                     {
                         this.state.bookShelfs.length > 0 ?
@@ -54,7 +53,7 @@ class Bookshelf extends Component {
                                     <img
                                         onClick={() => this.getBookinfo(value)}
                                         src={`http://statics.zhuishushenqi.com${value.cover}`}
-                                        alt={value.title }/>
+                                        alt={value.title}/>
                                     <div className="book-info">
                                         <p className="cursor" onClick={() => this.getBookinfo(value)}>
                                             {value.title}
