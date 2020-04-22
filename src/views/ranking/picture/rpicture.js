@@ -23,17 +23,17 @@ class Rpicture extends Component {
         rankCategory().then(res => {
             if (res.ok === true) {
                 let defaultType;
-                if (res.male[0]._id) {
-                    defaultType = res.male[0]._id
-                } else if (res.male[0].monthRank) {
-                    defaultType = res.male[0].monthRank
+                if (res.picture[0]._id) {
+                    defaultType = res.picture[0]._id
+                } else if (res.picture[0].monthRank) {
+                    defaultType = res.picture[0].monthRank
                 } else {
-                    defaultType = res.male[0].totalRank
+                    defaultType = res.picture[0].totalRank
                 }
                 this.setState({
-                    rankList: res.male,
-                    defaultRank: res.male[0],
-                    rankId: res.male[0]._id,
+                    rankList: res.picture,
+                    defaultRank: res.picture[0],
+                    rankId: res.picture[0]._id,
                     defaultType: defaultType
                 }, () => {
                     this.getRankPictureBook();

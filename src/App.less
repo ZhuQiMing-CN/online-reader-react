@@ -35,7 +35,7 @@
         text-align: center;
     }
     > .ant-layout-content {
-        width: 1200px;
+        width: 80%;
         margin: auto;
         overflow-y: auto;
         height: calc(100vh - 106px);
@@ -223,6 +223,7 @@
             box-shadow: 2px 4px 6px #bbb;
         }
         .book-info {
+            flex: auto;
             padding: 0px 10px;
             p {
                 margin: 0px;
@@ -235,6 +236,26 @@
                 line-height: 22px;
                 font-weight: 700;
             }
+        }
+    }
+}
+
+.book-chapter {
+    line-height: 32px;
+    background: #e9e6d0;
+    padding: 10px 10px 20px;
+    .chapter-btn {
+        display: flex;
+        align-items: center;
+        div:first-child {
+            flex: auto;
+            font-size: 16px;
+        }
+    }
+    .chapter-content {
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
     }
 }

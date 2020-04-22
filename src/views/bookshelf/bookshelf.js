@@ -56,7 +56,7 @@ class Bookshelf extends Component {
                                         src={`http://statics.zhuishushenqi.com${value.cover}`}
                                         alt={value.title }/>
                                     <div className="book-info">
-                                        <p onClick={() => this.getBookinfo(value)}>
+                                        <p className="cursor" onClick={() => this.getBookinfo(value)}>
                                             {value.title}
                                         </p>
                                         <p>作者：{value.author}</p>

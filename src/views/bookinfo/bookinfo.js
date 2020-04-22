@@ -73,8 +73,39 @@ class Bookinfo extends Component {
         });
     }
 
+    // 点击小说章节阅读
+    chapterMatter = (value) => {
+        let bookShelfs;
+        if (typeof this.props.bookShelf == "string") {
+            bookShelfs = JSON.parse(this.props.bookShelf);
+        } else {
+            bookShelfs = this.props.bookShelf;
+        }
+        if (bookShelfs.findIndex(item => item.id === this.props.match.params.id) === -1) {
+            let readRecord = {
+                id: this.state.bookLink._id,
+                title: this.state.bookLink.title,
+                cover: this.state.bookLink.cover,
+                author: this.state.bookLink.author,
+                readlink: value.link,
+                readtitle: value.title,
+                sourceId: this.state.sourceId,
+                readsource: this.state.sourceName,
+                lastChapter: this.state.lastChapter
+            };
+            bookShelfs.push(readRecord);
+            this.props.updateBookShelf({bookShelf: JSON.stringify(bookShelfs)});
+        } else {
+            bookShelfs[bookShelfs.findIndex(item => item.id === this.props.match.params.id)].sourceId = this.state.sourceId;
+            bookShelfs[bookShelfs.findIndex(item => item.id === this.props.match.params.id)].readlink = value.link;
+            bookShelfs[bookShelfs.findIndex(item => item.id === this.props.match.params.id)].readtitle = value.title;
+            this.props.updateBookShelf({bookShelf: JSON.stringify(bookShelfs)});
+        }
+        this.props.history.push('/bookchapter/' + this.props.match.params.id);
+    }
+
     // 加入书架
-    addBooks = (e) => {
+    addBooks = () => {
         let bookShelfs;
         if (typeof this.props.bookShelf == "string") {
             bookShelfs = JSON.parse(this.props.bookShelf);
@@ -95,13 +126,40 @@ class Bookinfo extends Component {
             };
             bookShelfs.push(readRecord);
             this.props.updateBookShelf({bookShelf: JSON.stringify(bookShelfs)});
+            message.success(`${this.state.bookLink.title} 加入书架成功~`);
         } else {
             bookShelfs[bookShelfs.findIndex(item => item.id === this.props.match.params.id)].sourceId = this.state.sourceId;
             bookShelfs[bookShelfs.findIndex(item => item.id === this.props.match.params.id)].readsource = this.state.sourceName;
             bookShelfs[bookShelfs.findIndex(item => item.id === this.props.match.params.id)].lastChapter = this.state.lastChapter;
             this.props.updateBookShelf({bookShelf: JSON.stringify(bookShelfs)});
-            message.error('此本书已经加入书架咯~');
+            message.error(`${this.state.bookLink.title} 此本书已经加入书架咯~`);
         }
+    }
+
+    // 开始阅读
+    readBooks = (e) => {
+        let bookShelfs;
+        if (typeof this.props.bookShelf == "string") {
+            bookShelfs = JSON.parse(this.props.bookShelf);
+        } else {
+            bookShelfs = this.props.bookShelf;
+        }
+        if (bookShelfs.findIndex(item => item.id === this.props.match.params.id) === -1) {
+            let readRecord = {
+                id: this.state.bookLink._id,
+                title: this.state.bookLink.title,
+                cover: this.state.bookLink.cover,
+                author: this.state.bookLink.author,
+                readlink: this.state.catalogList[0].link,
+                readtitle: this.state.catalogList[0].title,
+                sourceId: this.state.sourceId,
+                readsource: this.state.sourceName,
+                lastChapter: this.state.lastChapter
+            };
+            bookShelfs.push(readRecord);
+            this.props.updateBookShelf({bookShelf: JSON.stringify(bookShelfs)});
+        }
+        this.props.history.push('/bookchapter/' + e._id);
     }
 
     render () {
@@ -134,7 +192,12 @@ class Bookinfo extends Component {
                             </div>
                             <div className="mt-20">
                                 <Button type="primary" onClick={this.addBooks}>加入书架</Button>
-                                <Button type="primary" className="ml-15">开始阅读</Button>
+                                <Button
+                                    type="primary"
+                                    onClick={() => this.readBooks(this.state.bookLink)}
+                                    className="ml-15">
+                                    开始阅读
+                                </Button>
                                 <Button type="primary" className="ml-15">更换小说源</Button>
                             </div>
                         </div>
@@ -165,7 +228,10 @@ class Bookinfo extends Component {
                     <div style={{padding: "0px 10px"}}>
                         {
                             this.state.catalogList.map((value, index) => (
-                                <li className="chapter-li" key={value._id}>
+                                <li
+                                    className="chapter-li"
+                                    key={value._id}
+                                    onClick={() => this.chapterMatter(value)}>
                                     <span className={value.isVip?"text-danger":""}>{value.title}</span>
                                 </li>
                             ))

@@ -23,17 +23,17 @@ class Rfemale extends Component {
         rankCategory().then(res => {
             if (res.ok === true) {
                 let defaultType;
-                if (res.male[0]._id) {
-                    defaultType = res.male[0]._id
-                } else if (res.male[0].monthRank) {
-                    defaultType = res.male[0].monthRank
+                if (res.female[0]._id) {
+                    defaultType = res.female[0]._id
+                } else if (res.female[0].monthRank) {
+                    defaultType = res.female[0].monthRank
                 } else {
-                    defaultType = res.male[0].totalRank
+                    defaultType = res.female[0].totalRank
                 }
                 this.setState({
-                    rankList: res.male,
-                    defaultRank: res.male[0],
-                    rankId: res.male[0]._id,
+                    rankList: res.female,
+                    defaultRank: res.female[0],
+                    rankId: res.female[0]._id,
                     defaultType: defaultType
                 }, () => {
                     this.getRankFemaleBook();

@@ -20,6 +20,7 @@ import Rpress from '../views/ranking/press/rpress';
 import Rpicture from '../views/ranking/picture/rpicture';
 
 import Bookinfo from '../views/bookinfo/bookinfo';
+import Bookchapter from '../views/bookchapter/bookchapter';
 import Bookshelf from '../views/bookshelf/bookshelf';
 
 class MainView extends Component {
@@ -51,6 +52,7 @@ class MainView extends Component {
                     </Switch>
                 </Ranking>
                 <Route path="/bookinfo/:id" component={Bookinfo}></Route>
+                <Route path="/bookchapter/:id" component={Bookchapter}></Route>
                 <Route exact path="/bookshelf" component={Bookshelf}></Route>
             </Switch>
         );
