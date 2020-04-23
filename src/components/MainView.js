@@ -4,25 +4,26 @@
  */
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import loadable from '../util/loadable';
 
-import Home from '../views/home';
+const Home = loadable(() => import('../views/home'));
 
-import Category from '../views/category/Category';
-import Cmale from '../views/category/male/cmale';
-import Cfemale from '../views/category/female/cfemale';
-import Cpress from '../views/category/press/cpress';
-import Cpicture from '../views/category/picture/cpicture';
+const Category = loadable(() => import('../views/category/Category'));
+const Cmale = loadable(() => import('../views/category/male/cmale'));
+const Cfemale = loadable(() => import('../views/category/female/cfemale'));
+const Cpress = loadable(() => import('../views/category/press/cpress'));
+const Cpicture = loadable(() => import('../views/category/picture/cpicture'));
 
-import Ranking from '../views/ranking/Ranking';
-import Rmale from '../views/ranking/male/rmale';
-import Rfemale from '../views/ranking/female/rfemale';
-import Rpress from '../views/ranking/press/rpress';
-import Rpicture from '../views/ranking/picture/rpicture';
+const Ranking = loadable(() => import('../views/ranking/Ranking'));
+const Rmale = loadable(() => import('../views/ranking/male/rmale'));
+const Rfemale = loadable(() => import('../views/ranking/female/rfemale'));
+const Rpress = loadable(() => import('../views/ranking/press/rpress'));
+const Rpicture = loadable(() => import('../views/ranking/picture/rpicture'));
 
-import Bookinfo from '../views/bookinfo/bookinfo';
-import Bookchapter from '../views/bookchapter/bookchapter';
-import Bookshelf from '../views/bookshelf/bookshelf';
-import Booksearch from '../views/search/search';
+const Bookinfo = loadable(() => import('../views/bookinfo/bookinfo'));
+const Bookchapter = loadable(() => import('../views/bookchapter/bookchapter'));
+const Bookshelf = loadable(() => import('../views/bookshelf/bookshelf'));
+const Booksearch = loadable(() => import('../views/search/search'));
 
 class MainView extends Component {
     constructor (props) {
