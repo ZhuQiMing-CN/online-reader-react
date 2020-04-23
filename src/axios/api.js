@@ -2,7 +2,7 @@
  * @Author: ZhuQiMing
  * @CreateTime: 2020/4/14 17:08
  */
-import axios from 'axios';
+import axios from './axios';
 
 // 获取所有分类
 export const category = (params) => {
