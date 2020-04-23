@@ -17,8 +17,9 @@ class HeaderView extends Component {
     }
 
     componentDidMount() {
+        let current = this.props.location.pathname.split('/')[1];
         this.setState({
-            current: this.props.location.pathname.split('/')[1]
+            current: current ? current : 'home'
         });
         // 获取搜索热词
         this.getHotWords();

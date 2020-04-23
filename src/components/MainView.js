@@ -33,29 +33,32 @@ class MainView extends Component {
     render () {
         return (
             <Switch>
-                <Route path="/home" component={Home}></Route>
-                <Category path="/category">
-                    <Switch>
-                        <Redirect exact from="/category" to="/category/male"></Redirect>
-                        <Route exact path="/category/male" component={Cmale}></Route>
-                        <Route exact path="/category/female" component={Cfemale}></Route>
-                        <Route exact path="/category/press" component={Cpress}></Route>
-                        <Route exact path="/category/picture" component={Cpicture}></Route>
-                    </Switch>
-                </Category>
-                <Ranking path="/ranking">
-                    <Switch>
-                        <Redirect exact from="/ranking" to="/ranking/male"></Redirect>
-                        <Route exact path="/ranking/male" component={Rmale}></Route>
-                        <Route exact path="/ranking/female" component={Rfemale}></Route>
-                        <Route exact path="/ranking/press" component={Rpress}></Route>
-                        <Route exact path="/ranking/picture" component={Rpicture}></Route>
-                    </Switch>
-                </Ranking>
-                <Route path="/bookinfo/:id" component={Bookinfo}></Route>
-                <Route path="/bookchapter/:id" component={Bookchapter}></Route>
-                <Route exact path="/bookshelf" component={Bookshelf}></Route>
-                <Route exact path="/search" component={Booksearch}></Route>
+                <Switch>
+                    <Route exact path="/home" component={Home}></Route>
+                    <Category path="/category">
+                        <Switch>
+                            <Redirect exact from="/category" to="/category/male"></Redirect>
+                            <Route exact path="/category/male" component={Cmale}></Route>
+                            <Route exact path="/category/female" component={Cfemale}></Route>
+                            <Route exact path="/category/press" component={Cpress}></Route>
+                            <Route exact path="/category/picture" component={Cpicture}></Route>
+                        </Switch>
+                    </Category>
+                    <Ranking path="/ranking">
+                        <Switch>
+                            <Redirect exact from="/ranking" to="/ranking/male"></Redirect>
+                            <Route exact path="/ranking/male" component={Rmale}></Route>
+                            <Route exact path="/ranking/female" component={Rfemale}></Route>
+                            <Route exact path="/ranking/press" component={Rpress}></Route>
+                            <Route exact path="/ranking/picture" component={Rpicture}></Route>
+                        </Switch>
+                    </Ranking>
+                    <Route path="/bookinfo/:id" component={Bookinfo}></Route>
+                    <Route path="/bookchapter/:id" component={Bookchapter}></Route>
+                    <Route exact path="/bookshelf" component={Bookshelf}></Route>
+                    <Route exact path="/search" component={Booksearch}></Route>
+                    <Redirect from="*" to="/home"></Redirect>
+                </Switch>
             </Switch>
         );
     }
